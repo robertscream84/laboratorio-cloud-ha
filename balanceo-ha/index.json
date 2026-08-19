@@ -1,0 +1,15 @@
+{
+  "title": "Balanceo de carga y alta disponibilidad",
+  "description": "Laboratorio práctico de infraestructura cloud con Docker, Nginx y HAProxy",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "finish": {
+      "text": "finish.md"
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
