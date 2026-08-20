@@ -26,6 +26,10 @@
             "title": "Fase 5 - Balanceador HAProxy",
             "text": "fase5.md"
           }
+              {
+          "title": "Fase 6 - Monitoreo del balanceo",
+            "text": "fase6.md"
+              }
         ],
     "finish": {
       "text": "finish.md"
