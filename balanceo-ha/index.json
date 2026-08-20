@@ -6,30 +6,30 @@
       "text": "intro.md"
     },
             "steps": [
-          {
-            "title": "Fase 1 - Preparación del entorno",
-            "text": "fase1.md"
-          },
-          {
-            "title": "Fase 2 - Creación de la red privada",
-            "text": "fase2.md"
-          },
-          {
-            "title": "Fase 3 - Servidor WEB01",
-            "text": "fase3.md"
-          },
-          {
-            "title": "Fase 4 - Servidor WEB02",
-            "text": "fase4.md"
-          },
-          {
-            "title": "Fase 5 - Balanceador HAProxy",
-            "text": "fase5.md"
-          }
               {
-          "title": "Fase 6 - Monitoreo del balanceo",
-            "text": "fase6.md"
-              }
+                "title": "Fase 1 - Preparación del entorno",
+                "text": "fase1.md"
+              },
+              {
+                "title": "Fase 2 - Creación de la red privada",
+                "text": "fase2.md"
+              },
+              {
+                "title": "Fase 3 - Servidor WEB01",
+                "text": "fase3.md"
+              },
+              {
+                "title": "Fase 4 - Servidor WEB02",
+                "text": "fase4.md"
+              },
+              {
+                "title": "Fase 5 - Balanceador HAProxy",
+                "text": "fase5.md"
+              },
+              {
+                "title": "Fase 6 - Monitoreo del balanceo",
+                "text": "fase6.md"
+              },
         ],
     "finish": {
       "text": "finish.md"
