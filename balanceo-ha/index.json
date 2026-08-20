@@ -5,6 +5,12 @@
     "intro": {
       "text": "intro.md"
     },
+    "steps": [
+      {
+        "title": "Fase 1 - Preparación del entorno",
+        "text": "fase1.md"
+      }
+    ],
     "finish": {
       "text": "finish.md"
     }
