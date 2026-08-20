@@ -5,7 +5,7 @@
     "intro": {
       "text": "intro.md"
     },
-        "steps": [
+              "steps": [
         {
           "title": "Fase 1 - Preparación del entorno",
           "text": "fase1.md"
@@ -13,6 +13,10 @@
         {
           "title": "Fase 2 - Creación de la red privada",
           "text": "fase2.md"
+        },
+        {
+          "title": "Fase 3 - Servidor WEB01",
+          "text": "fase3.md"
         }
       ],
     "finish": {
