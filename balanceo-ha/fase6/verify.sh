@@ -1,57 +1,38 @@
-{
-  "title": "Balanceo de carga y alta disponibilidad",
-  "description": "Laboratorio práctico de infraestructura cloud con Docker, Nginx y HAProxy",
-  "details": {
-    "intro": {
-      "text": "intro.md"
-    },
-    "steps": [
-      {
-        "title": "Fase 1 - Preparación del entorno",
-        "text": "fase1.md",
-        "verify": "fase1/verify.sh"
-      },
-      {
-        "title": "Fase 2 - Creación de la red privada",
-        "text": "fase2.md",
-        "verify": "fase2/verify.sh"
-      },
-      {
-        "title": "Fase 3 - Servidor WEB01",
-        "text": "fase3.md",
-        "verify": "fase3/verify.sh"
-      },
-      {
-        "title": "Fase 4 - Servidor WEB02",
-        "text": "fase4.md",
-        "verify": "fase4/verify.sh"
-      },
-      {
-        "title": "Fase 5 - Balanceador HAProxy",
-        "text": "fase5.md",
-        "verify": "fase5/verify.sh"
-      },
-      {
-        "title": "Fase 6 - Monitoreo del balanceo",
-        "text": "fase6.md",
-        "verify": "fase6/verify.sh"
-      },
-      {
-        "title": "Fase 7 - Resiliencia y alta disponibilidad",
-        "text": "fase7.md",
-        "verify": "fase7/verify.sh"
-      },
-      {
-        "title": "Fase 8 - Recuperación, escalabilidad y cierre",
-        "text": "fase8.md",
-        "verify": "fase8/verify.sh"
-      }
-    ],
-    "finish": {
-      "text": "finish.md"
-    }
-  },
-  "backend": {
-    "imageid": "ubuntu"
-  }
-}
+#!/bin/bash
+
+for servicio in haproxy web01 web02
+do
+    if ! docker inspect "$servicio" >/dev/null 2>&1; then
+        echo "ERROR: No existe $servicio."
+        exit 1
+    fi
+
+    estado=$(docker inspect -f '{{.State.Running}}' "$servicio" 2>/dev/null)
+
+    if [ "$estado" != "true" ]; then
+        echo "ERROR: $servicio no está operativo."
+        exit 1
+    fi
+done
+
+web01=0
+web02=0
+
+for i in {1..20}
+do
+    respuesta=$(curl -s http://localhost:8080 | grep -o 'WEB0[12]' | head -1)
+
+    [ "$respuesta" = "WEB01" ] && web01=$((web01+1))
+    [ "$respuesta" = "WEB02" ] && web02=$((web02+1))
+done
+
+if [ "$web01" -eq 0 ] || [ "$web02" -eq 0 ]; then
+    echo "ERROR: No se detectó tráfico hacia ambos servidores."
+    exit 1
+fi
+
+echo "OK: Balanceo detectado."
+echo "WEB01: $web01 solicitudes"
+echo "WEB02: $web02 solicitudes"
+
+exit 0
