@@ -34,6 +34,10 @@
                 "title": "Fase 7 - Resiliencia y alta disponibilidad",
                 "text": "fase7.md"
               },
+             {
+                "title": "Fase 8 - Recuperación, escalabilidad y cierre",
+                "text": "fase8.md"
+              },
         ],
     "finish": {
       "text": "finish.md"
