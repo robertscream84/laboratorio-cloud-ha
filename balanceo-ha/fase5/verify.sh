@@ -1,57 +1,39 @@
-{
-  "title": "Balanceo de carga y alta disponibilidad",
-  "description": "Laboratorio práctico de infraestructura cloud con Docker, Nginx y HAProxy",
-  "details": {
-    "intro": {
-      "text": "intro.md"
-    },
-    "steps": [
-      {
-        "title": "Fase 1 - Preparación del entorno",
-        "text": "fase1.md",
-        "verify": "fase1/verify.sh"
-      },
-      {
-        "title": "Fase 2 - Creación de la red privada",
-        "text": "fase2.md",
-        "verify": "fase2/verify.sh"
-      },
-      {
-        "title": "Fase 3 - Servidor WEB01",
-        "text": "fase3.md",
-        "verify": "fase3/verify.sh"
-      },
-      {
-        "title": "Fase 4 - Servidor WEB02",
-        "text": "fase4.md",
-        "verify": "fase4/verify.sh"
-      },
-      {
-        "title": "Fase 5 - Balanceador HAProxy",
-        "text": "fase5.md",
-        "verify": "fase5/verify.sh"
-      },
-      {
-        "title": "Fase 6 - Monitoreo del balanceo",
-        "text": "fase6.md",
-        "verify": "fase6/verify.sh"
-      },
-      {
-        "title": "Fase 7 - Resiliencia y alta disponibilidad",
-        "text": "fase7.md",
-        "verify": "fase7/verify.sh"
-      },
-      {
-        "title": "Fase 8 - Recuperación, escalabilidad y cierre",
-        "text": "fase8.md",
-        "verify": "fase8/verify.sh"
-      }
-    ],
-    "finish": {
-      "text": "finish.md"
-    }
-  },
-  "backend": {
-    "imageid": "ubuntu"
-  }
-}
+#!/bin/bash
+
+if ! docker inspect haproxy >/dev/null 2>&1; then
+    echo "ERROR: No existe el contenedor haproxy."
+    exit 1
+fi
+
+estado=$(docker inspect -f '{{.State.Running}}' haproxy 2>/dev/null)
+
+if [ "$estado" != "true" ]; then
+    echo "ERROR: HAProxy existe, pero no está ejecutándose."
+    exit 1
+fi
+
+if ! curl -fs http://localhost:8080 >/dev/null 2>&1; then
+    echo "ERROR: El balanceador no responde en localhost:8080."
+    exit 1
+fi
+
+resultado=""
+
+for i in {1..10}
+do
+    respuesta=$(curl -s http://localhost:8080 | grep -o 'WEB0[12]' | head -1)
+    resultado="$resultado $respuesta"
+done
+
+if ! echo "$resultado" | grep -q "WEB01"; then
+    echo "ERROR: HAProxy no está enviando tráfico hacia WEB01."
+    exit 1
+fi
+
+if ! echo "$resultado" | grep -q "WEB02"; then
+    echo "ERROR: HAProxy no está enviando tráfico hacia WEB02."
+    exit 1
+fi
+
+echo "OK: HAProxy responde y distribuye tráfico entre WEB01 y WEB02."
+exit 0
