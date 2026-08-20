@@ -4,7 +4,7 @@
 
 En este laboratorio se construirá paso a paso una infraestructura distribuida capaz de mantener un servicio web disponible incluso cuando uno de sus servidores presente una falla.
 
-La práctica utiliza **Ubuntu Linux, Docker, Nginx y HAProxy**, herramientas gratuitas y de código abierto. Todo el laboratorio se ejecutará directamente desde el navegador mediante Killercoda, por lo que no se requiere instalar software adicional ni utilizar una tarjeta de crédito.
+La práctica utiliza **Ubuntu Linux, Docker, Nginx y HAProxy**, herramientas gratuitas y de código abierto. Todo el laboratorio se ejecutará directamente desde el navegador mediante Killercoda, por lo que no se requiere instalar software adicional.
 
 ---
 
