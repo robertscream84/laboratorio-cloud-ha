@@ -30,6 +30,10 @@
                 "title": "Fase 6 - Monitoreo del balanceo",
                 "text": "fase6.md"
               },
+              {
+                "title": "Fase 7 - Resiliencia y alta disponibilidad",
+                "text": "fase7.md"
+              },
         ],
     "finish": {
       "text": "finish.md"
