@@ -5,12 +5,16 @@
     "intro": {
       "text": "intro.md"
     },
-    "steps": [
-      {
-        "title": "Fase 1 - Preparación del entorno",
-        "text": "fase1.md"
-      }
-    ],
+        "steps": [
+        {
+          "title": "Fase 1 - Preparación del entorno",
+          "text": "fase1.md"
+        },
+        {
+          "title": "Fase 2 - Creación de la red privada",
+          "text": "fase2.md"
+        }
+      ],
     "finish": {
       "text": "finish.md"
     }
